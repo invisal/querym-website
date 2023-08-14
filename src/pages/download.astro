@@ -1,25 +1,129 @@
 ---
+import { AstroSeo } from '@astrolib/seo';
+import Footer from '../components/global/Footer.astro';
+import Navigation from '../components/global/Navigation.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 export const prerender = false;
-const rawResponse = await fetch(
-  'https://api.github.com/repos/invisal/query-master/releases/latest',
-);
+const rawResponse = await fetch(import.meta.env.RELEASE_URL, {
+  headers: {
+    authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
+  },
+});
+
 const release = await rawResponse.json();
 const version = release.tag_name;
 
-// get all downloads for window, linux, mac with intel and mac with apple silicon
 const downloads = release.assets
   ?.filter(asset => asset.name.endsWith('.dmg') || asset.name.endsWith('.exe'))
   ?.map(asset => ({
     name: asset.name,
     url: asset.browser_download_url,
   }));
-console.log('downloads', downloads);
-console.log('release', release);
+
+const downloadLinks = {
+  windows: downloads.find(download => download.name.endsWith('.exe')),
+  mac: downloads.find(download => download.name.endsWith('arm64.dmg')),
+  linux: downloads.find(download => download.name.endsWith('.deb')),
+};
 ---
 
-<h1>Version {version}</h1>
-<pre>
-    <code>
-        {JSON.stringify(downloads, null, 2)}
-    </code>
-</pre>
+<AstroSeo
+  title="Download"
+  description="Download QueryMaster for free. QueryMaster is a minimalistic, fast and powerful SQL client. It is designed to help you manage and understand your database effortlessly."
+  canonical="https://www.querymaster.io"
+  openGraph={{
+    url: 'https://www.querymaster.io',
+    title: 'Try QueryMaster Beta for free',
+    description:
+      'Download QueryMaster for free. QueryMaster is a minimalistic, fast and powerful SQL client. It is designed to help you manage and understand your database effortlessly.',
+    images: [
+      {
+        url: '/public/QueryMaster-half.png',
+        width: 1200,
+        height: 630,
+        alt: 'Social open graph',
+        type: 'image/jpeg',
+      },
+      {
+        url: '/public/QueryMaster.png',
+        width: 4096,
+        height: 4096,
+        alt: 'Twitter open graph',
+        type: 'image/jpeg',
+      },
+    ],
+    site_name: 'QueryMaster',
+  }}
+/>
+<BaseLayout>
+  <main class="min-h-[100dvh] flex flex-col justify-between">
+    <Navigation />
+
+    <section
+      id="downloads"
+      class="w-full flex flex-col items-center justify-center flex-1 py-10 mx-auto md:px-12 px-8 max-w-7xl lg:px-16"
+    >
+      <div>
+        <h1 class="text-4xl font-bold tracking-tighter text-center text-black">
+          Try QueryMaster Beta for free
+        </h1>
+        <p class="mt-3 text-lg text-center text-gray-500 max-w-2xl mx-auto">
+          QueryMaster is a minimalistic, fast and powerful SQL client. It is
+          designed to help you manage and understand your database effortlessly.
+        </p>
+        <small>
+          <p class="mt-3 text-lg text-center text-gray-900 max-w-2xl mx-auto">
+            Version &CenterDot; {version}
+          </p>
+        </small>
+      </div>
+      <div
+        class="grid mt-16 mb-16 max-sm:grid-cols-1 grid-cols-2 max-w-2xl gap-3 mx-auto"
+      >
+        <a
+          download={downloadLinks.windows.name}
+          href={downloadLinks.windows.url}
+          class="items-center gap-5 justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex bg-black border-2 border-black duration-200 focus-visible:ring-black hover:bg-transparent hover:border-black hover:text-black lg:w-auto px-6 py-3 text-center text-white w-full"
+        >
+          <ion-icon name="logo-windows" class="text-2xl scale-x-[-1]"
+          ></ion-icon>
+          Download for Window
+        </a>
+        <a
+          download={downloadLinks.mac.name}
+          href={downloadLinks.mac.url}
+          class="items-center gap-5 justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex bg-black border-2 border-black duration-200 focus-visible:ring-black hover:bg-transparent hover:border-black hover:text-black lg:w-auto px-6 py-3 text-center text-white w-full"
+        >
+          <ion-icon name="logo-apple" class="text-2xl"></ion-icon>
+          Download for Mac
+        </a>
+        <button
+          disabled
+          class="items-center gap-5 disabled:bg-gray-400 disabled:hover:text-white cursor-not-allowed justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex bg-black border-2 border-gray-300 duration-200 focus-visible:ring-black hover:bg-transparent hover:text-black lg:w-auto px-6 py-3 text-center text-white w-full"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            ><path
+              fill="currentColor"
+              d="M14.62 8.35c-.42.28-1.75 1.04-1.95 1.19c-.39.31-.75.29-1.14-.01c-.2-.16-1.53-.92-1.95-1.19c-.48-.31-.45-.7.08-.92c1.64-.69 3.28-.64 4.91.03c.49.21.51.6.05.9m7.22 7.28c-.93-2.09-2.2-3.99-3.84-5.66a4.31 4.31 0 0 1-1.06-1.88c-.1-.33-.17-.67-.24-1.01c-.2-.88-.29-1.78-.7-2.61c-.73-1.58-2-2.4-3.84-2.47c-1.81.05-3.16.81-3.95 2.4c-.21.43-.36.88-.46 1.34c-.17.76-.32 1.55-.5 2.32c-.15.65-.45 1.21-.96 1.71c-1.61 1.57-2.9 3.37-3.88 5.35c-.14.29-.28.58-.37.88c-.19.66.29 1.12.99.96c.44-.09.88-.18 1.3-.31c.41-.15.57-.05.67.35c.65 2.15 2.07 3.66 4.24 4.5c4.12 1.56 8.93-.66 9.97-4.58c.07-.27.17-.37.47-.27c.46.14.93.24 1.4.35c.49.09.85-.16.92-.64c.03-.26-.06-.49-.16-.73"
+            ></path></svg
+          >
+          Linux coming soon...
+        </button>
+        <a
+          target="_blank"
+          href="https://github.com/invisal/query-master/releases"
+          class="items-center gap-5 justify-center font-medium rounded-xl text-black focus-visible:outline-black focus:outline-none inline-flex border-2 hover:bg-gray-50 border-gray-300 duration-200 focus-visible:ring-black lg:w-auto px-6 py-3 text-center w-full"
+        >
+          <ion-icon name="logo-github" class="text-2xl"></ion-icon>
+          See all releases
+        </a>
+      </div>
+    </section>
+    <Footer />
+  </main>
+</BaseLayout>

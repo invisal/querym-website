@@ -1,24 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/landing/Hero.astro';
-import SectionOne from '../components/landing/SectionOne.astro';
-import Cta from '../components/global/Cta.astro';
+import Navigation from '../components/global/Navigation.astro';
 import Footer from '../components/global/Footer.astro';
 import { AstroSeo } from '@astrolib/seo';
-import Navigation from '../components/global/Navigation.astro';
+import { Content as TermsSection } from '../components/infopages/Terms.md';
 ---
 
 <!---
 Use AstroSeo in all the pages you want different Seo than the index page
 -->
 <AstroSeo
-  title="QueryMaster"
-  description="QueryMaster is powerful cross-platform desktop SQL client."
+  title="Code of Conducts"
+  description="Code of Conducts for QueryMaster's website"
   canonical="https://www.querymaster.io"
   openGraph={{
     url: 'https://www.querymaster.io',
-    title: 'QueryMaster - SQL Client from the future',
-    description: 'QueryMaster is powerful cross-platform desktop SQL client.',
+    title: 'QueryMaster - Code of Conducts',
+    description: 'Code of Conducts for QueryMaster',
     images: [
       {
         url: '/public/QueryMaster-half.png',
@@ -40,8 +38,10 @@ Use AstroSeo in all the pages you want different Seo than the index page
 />
 <BaseLayout>
   <Navigation />
-  <Hero />
-  <SectionOne />
-  <Cta />
+  <section id="code-of-conducts">
+    <article class="prose prose-lg mx-auto py-10">
+      <TermsSection />
+    </article>
+  </section>
   <Footer />
 </BaseLayout>
