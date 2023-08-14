@@ -1,0 +1,25 @@
+---
+export const prerender = false;
+const rawResponse = await fetch(
+  'https://api.github.com/repos/invisal/query-master/releases/latest',
+);
+const release = await rawResponse.json();
+const version = release.tag_name;
+
+// get all downloads for window, linux, mac with intel and mac with apple silicon
+const downloads = release.assets
+  ?.filter(asset => asset.name.endsWith('.dmg') || asset.name.endsWith('.exe'))
+  ?.map(asset => ({
+    name: asset.name,
+    url: asset.browser_download_url,
+  }));
+console.log('downloads', downloads);
+console.log('release', release);
+---
+
+<h1>Version {version}</h1>
+<pre>
+    <code>
+        {JSON.stringify(downloads, null, 2)}
+    </code>
+</pre>
