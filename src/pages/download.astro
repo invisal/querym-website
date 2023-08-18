@@ -5,7 +5,8 @@ import Navigation from '../components/global/Navigation.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 export const prerender = false;
-const rawResponse = await fetch(import.meta.env.RELEASE_URL, {
+
+const rawResponse = await fetch("https://api.github.com/repos/invisal/query-master/releases/latest", {
   headers: {
     authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
   },
