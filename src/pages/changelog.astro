@@ -8,7 +8,7 @@ import { marked } from 'marked';
 export const prerender = false;
 
 const changeLogRaw = await fetch(
-  'https://api.github.com/repos/invisal/query-master/releases',
+  'https://api.github.com/repos/invisal/query-master/releases?per_page=5',
   {
     headers: {
       authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
@@ -87,6 +87,16 @@ Use AstroSeo in all the pages you want different Seo than the index page
               </div>
             ))
           }
+        </div>
+        <div class="w-full flex">
+          <a
+            target="_blank"
+            href="https://github.com/invisal/query-master/releases"
+            class="items-center gap-5 mt-24 mx-auto justify-center font-medium rounded-xl text-black focus-visible:outline-black focus:outline-none inline-flex border-2 hover:bg-gray-50 border-gray-300 duration-200 focus-visible:ring-black lg:w-auto px-6 py-3 text-center w-full"
+          >
+            <ion-icon name="logo-github" class="text-2xl"></ion-icon>
+            See all Changes
+          </a>
         </div>
       </div>
     </div>
