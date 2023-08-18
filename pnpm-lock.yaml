@@ -8,6 +8,9 @@ dependencies:
   '@astrojs/markdown-component':
     specifier: ^1.0.5
     version: 1.0.5
+  '@astrojs/markdown-remark':
+    specifier: ^2.2.1
+    version: 2.2.1(astro@2.10.9)
   '@astrojs/sitemap':
     specifier: ^2.0.1
     version: 2.0.1
