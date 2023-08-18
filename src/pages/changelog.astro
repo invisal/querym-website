@@ -6,6 +6,7 @@ import { AstroSeo } from '@astrolib/seo';
 import Markdown from '@astrojs/markdown-component';
 
 export const prerender = false;
+
 const changeLogRaw = await fetch(
   'https://api.github.com/repos/invisal/query-master/releases',
   {
