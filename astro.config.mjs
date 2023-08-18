@@ -8,5 +8,5 @@ import vercel from '@astrojs/vercel/serverless';
 export default defineConfig({
   integrations: [tailwind(), image()],
   adapter: vercel(),
-  output: 'hybrid',
+  output: 'server',
 });
