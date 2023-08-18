@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/global/Navigation.astro';
 import Footer from '../components/global/Footer.astro';
 import { AstroSeo } from '@astrolib/seo';
-import Markdown from '@astrojs/markdown-component';
+import { marked } from 'marked';
 
 export const prerender = false;
 
@@ -79,9 +79,10 @@ Use AstroSeo in all the pages you want different Seo than the index page
                   </span>
                 </div>
                 <div class="lg:col-span-2">
-                  <span class="prose">
-                    <Markdown>{item.body || 'No content'}</Markdown>
-                  </span>
+                  <article
+                    class="prose"
+                    set:html={marked.parse(item.body) || 'No Content'}
+                  />
                 </div>
               </div>
             ))
