@@ -5,13 +5,11 @@ import compress from 'astro-compress';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 
-import node from '@astrojs/node';
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), image(), compress(), partytown(), sitemap()],
-  adapter: node({
-    mode: 'standalone',
-  }),
-  output: 'hybrid',
+  adapter: vercel(),
+  output: 'hybrid'
 });
