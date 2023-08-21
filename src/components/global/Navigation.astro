@@ -38,34 +38,38 @@
       </div>
       <nav
         :class="{'flex': open, 'hidden': !open}"
-        class="flex-col items-center flex-grow max-sm:gap-3 max-sm:py-3  hidden md:pb-0 md:flex md:justify-end md:flex-row"
+        class="flex-col items-center flex-grow hidden md:pb-0 md:flex md:flex-row"
       >
         <a
-          class="px-2 lg:px-6 py-2 md:px-3 text-sm font-medium text-black hover:text-accent-400 lg:ml-auto"
+          class="px-2 lg:px-6 md:px-3 text-sm font-medium text-black hover:text-accent-400"
           href="/#features">Features</a
         >
 
         <a
-          class="px-2 lg:px-6 py-2 md:px-3 text-sm font-medium text-black hover:text-accent-400"
-          href="/changelog"
+          class="px-2 lg:px-6 md:px-3 text-sm font-medium text-black hover:text-accent-400"
+          href="https://github.com/invisal/query-master/releases"
         >
           Changelog</a
         >
 
         <a
-          class="px-2 lg:px-6 py-2 md:px-3 text-sm font-medium text-black hover:text-accent-400"
-          href="/code-of-conducts"
+          class="px-2 lg:px-6 md:px-3 text-sm font-medium text-blackf"
+          href="/download"
         >
-          Code of Conducts</a
+          Downloads</a
         >
 
-        <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
+        <div class="flex-grow">&nbsp;</div>
+
+        <div class="inline-flex ml-3 mt-1">
           <a
-            href="/download"
-            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-black bg-slate-100 rounded-lg group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-50 active:bg-slate-200 active:text-accent-400 focus-visible:outline-black"
+            class="github-button"
+            href="https://github.com/invisal/query-master"
+            data-color-scheme="no-preference: light; light: light; dark: dark;"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star invisal/query-master on GitHub">Star</a
           >
-            Download
-          </a>
         </div>
       </nav>
     </div>

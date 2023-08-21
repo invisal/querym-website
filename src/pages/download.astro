@@ -1,31 +1,38 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
-import Footer from '../components/global/Footer.astro';
-import Navigation from '../components/global/Navigation.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { AstroSeo } from "@astrolib/seo";
+import Footer from "../components/global/Footer.astro";
+import Navigation from "../components/global/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 export const prerender = false;
 
-const rawResponse = await fetch("https://api.github.com/repos/invisal/query-master/releases/latest", {
-  headers: {
-    authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
-  },
-});
+const rawResponse = await fetch(
+  "https://api.github.com/repos/invisal/query-master/releases/latest",
+  {
+    headers: {
+      authorization: `Bearer ${import.meta.env.GH_TOKEN}`,
+    },
+  }
+);
 
 const release = await rawResponse.json();
 const version = release.tag_name;
 
 const downloads = release.assets
-  ?.filter(asset => asset.name.endsWith('.dmg') || asset.name.endsWith('.exe'))
-  ?.map(asset => ({
+  ?.filter(
+    (asset) => asset.name.endsWith(".dmg") || asset.name.endsWith(".exe")
+  )
+  ?.map((asset) => ({
     name: asset.name,
     url: asset.browser_download_url,
   }));
 
 const downloadLinks = {
-  windows: downloads.find(download => download.name.endsWith('.exe')),
-  mac: downloads.find(download => download.name.endsWith('arm64.dmg')),
-  linux: downloads.find(download => download.name.endsWith('.deb')),
+  windows: downloads.find((download) =>
+    download.name.startsWith("QueryMaster-Setup")
+  ),
+  mac: downloads.find((download) => download.name.endsWith("arm64.dmg")),
+  linux: downloads.find((download) => download.name.endsWith(".deb")),
 };
 ---
 
@@ -34,27 +41,27 @@ const downloadLinks = {
   description="Download QueryMaster for free. QueryMaster is a minimalistic, fast and powerful SQL client. It is designed to help you manage and understand your database effortlessly."
   canonical="https://www.querymaster.io"
   openGraph={{
-    url: 'https://www.querymaster.io',
-    title: 'Try QueryMaster Beta for free',
+    url: "https://www.querymaster.io",
+    title: "Try QueryMaster Beta for free",
     description:
-      'Download QueryMaster for free. QueryMaster is a minimalistic, fast and powerful SQL client. It is designed to help you manage and understand your database effortlessly.',
+      "Download QueryMaster for free. QueryMaster is a minimalistic, fast and powerful SQL client. It is designed to help you manage and understand your database effortlessly.",
     images: [
       {
-        url: '/QueryMaster-half.png',
+        url: "/QueryMaster-half.png",
         width: 1200,
         height: 630,
-        alt: 'Social open graph',
-        type: 'image/jpeg',
+        alt: "Social open graph",
+        type: "image/jpeg",
       },
       {
-        url: '/QueryMaster.png',
+        url: "/QueryMaster.png",
         width: 4096,
         height: 4096,
-        alt: 'Twitter open graph',
-        type: 'image/jpeg',
+        alt: "Twitter open graph",
+        type: "image/jpeg",
       },
     ],
-    site_name: 'QueryMaster',
+    site_name: "QueryMaster",
   }}
 />
 <BaseLayout>
