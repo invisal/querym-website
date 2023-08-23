@@ -1,0 +1,17 @@
+---
+const { title, image } = Astro.props;
+---
+
+<div class="max-sm:border-2 border-gray-100/80 p-2 rounded-lg">
+  <p class="mt-4 text-xl font-semibold leading-6">{title}</p>
+  <div class="mt-4 mb-4">
+    <img
+      src={image}
+      alt=""
+      class="shadow-lg rounded-lg aspect-video object-cover"
+    />
+  </div>
+  <div class="text-slate-500">
+    <slot />
+  </div>
+</div>
