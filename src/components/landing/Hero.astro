@@ -1,3 +1,7 @@
+---
+import DownloadButton from "../DownloadButton.astro";
+---
+
 <section>
   <div
     class="mx-auto w-full lg:px-24 max-w-7xl md:px-12 items-center px-8 py-4"
@@ -7,7 +11,7 @@
         <p
           class="text-black mt-8 font-extrabold lg:text-4xl text-3xl tracking-tight"
         >
-          QueryMaster
+          Querym
         </p>
         <p
           class="text-black font-extrabold lg:text-3xl text-2xl tracking-tight"
@@ -20,22 +24,7 @@
           in our goal to create one of the best tools available.
         </p>
       </div>
-      <div class="flex justify-center gap-3 mt-10 flex-col sm:flex-row">
-        <a
-          class="items-center justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex duration-200 text-black lg:w-auto px-6 py-3 text-center text-black/80 w-full border"
-          href="https://github.com/invisal/query-master">GitHub</a
-        >
-        <a
-          class="items-center justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex bg-black border-2 border-black duration-200 focus-visible:ring-black hover:bg-transparent hover:border-black hover:text-black lg:w-auto px-6 py-3 text-center text-white w-full"
-          href="https://apps.microsoft.com/store/detail/querymaster/9PBF90B3T7Z2"
-          >Windows Download
-        </a>
-        <a
-          class="items-center justify-center font-medium rounded-xl focus-visible:outline-black focus:outline-none inline-flex bg-black border-2 border-black duration-200 focus-visible:ring-black hover:bg-transparent hover:border-black hover:text-black lg:w-auto px-6 py-3 text-center text-white w-full"
-          href="https://github.com/invisal/query-master/releases"
-          >Mac Download
-        </a>
-      </div>
+      <DownloadButton />
     </div>
   </div>
 </section>
